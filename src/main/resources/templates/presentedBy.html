@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Presented by</title>
+    <link rel="stylesheet" th:href="@{style.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/home}">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/loadSensor}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/reminder}">Medication Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/PresentedBy}">Presented By</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto"> <!-- Use ms-auto here -->
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary me-2" th:href="@{/registration}">Register</a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.isLoggedIn}">
+                        <a class="btn btn-primary" th:href="@{/login}">Log In</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.isLoggedIn}">
+                        <a class="btn btn-primary" th:href="@{/logout}">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section id="presentedBy">
+        <h1>Presented by Team PillGate</h1>
+            <div class="team-container">
+                <div class="teamMember">
+                    <img class="rounded-circle" src="/images/emran.jpg" alt="Emran">
+                    <h3> Emran </h3>
+                    <h4>Developer</h4>
+                    <p>Implementing database / graph analysis.</p>
+                </div>
+
+                <div class="teamMember">
+                    <img class="rounded-circle" src="/images/William.jpg" alt="William">
+                    <h3>William</h3>
+                    <h4>Project Management</h4>
+                    <p>Manage Project and design and implementation</p>
+                </div>
+
+                <div class="teamMember">
+                    <img class="rounded-circle" src="/images/Alperen.jpg" alt="Alperen">
+                    <h3>Alperen</h3>
+                    <h4>Developer</h4>
+                    <p>Responsible for Arduino and implementation</p>
+                </div>
+
+                <div class="teamMember">
+                    <img class="rounded-circle" src="/images/Manami.jpg" alt="Manami">
+                    <h3>Manami</h3>
+                    <h4>Developer</h4>
+                    <p>Responsible for design and implementation</p>
+                </div>
+
+                <div class="teamMember">
+                    <img class="rounded-circle" src="/images/Narjiss.jpg" alt="Narjiss">
+                    <h3>Narjiss</h3>
+                    <h4>Developer</h4>
+                    <p>Responsible for design and implementation</p>
+                </div>
+            </div>
+    </section>
+<br>
+<br>
+<br>
+<!--    <section>-->
+<!--        <h2>Work Products</h2>-->
+<!--        <div class="container">-->
+<!--            <div class="table" id="work_done">-->
+<!--                <div class="table-header">-->
+<!--                    <div class="header__item"><a id="name" class="filter__link" >Name</a></div>-->
+<!--                    <div class="header__item"><a id="work" class="filter__link">Work</a></div>-->
+<!--                    <div class="header__item"><a id="links" class="filter__link">GitLab Links</a></div>-->
+<!--                </div>-->
+<!--                <div class="table-row">-->
+<!--                    <div class="table-data">Emran</div>-->
+<!--                    <div class="table-data">login html form and game statistics</div>-->
+<!--                    <div class="table-data"><a href="https://gitlab.com/kdg-ti/integration-1.2/2022-2023/s2-05/S2-05/-/boards/5353083" target="_blank">GitLab Link</a></div>-->
+<!--                </div>-->
+<!--                <div class="table-row">-->
+<!--                    <div class="table-data">William</div>-->
+<!--                    <div class="table-data">login html form and game statistics</div>-->
+<!--                    <div class="table-data"><a href="https://gitlab.com/kdg-ti/integration-1.2/2022-2023/s2-05/S2-05/-/boards/5353083" target="_blank">GitLab Link</a></div>-->
+<!--                </div>-->
+<!--                <div class="table-row">-->
+<!--                    <div class="table-data">Alperen</div>-->
+<!--                    <div class="table-data">login html form and game statistics</div>-->
+<!--                    <div class="table-data"><a href="https://gitlab.com/kdg-ti/integration-1.2/2022-2023/s2-05/S2-05/-/boards/5353083" target="_blank">GitLab Link</a></div>-->
+<!--                </div>-->
+<!--                <div class="table-row">-->
+<!--                    <div class="table-data">Manami</div>-->
+<!--                    <div class="table-data">login html form and game statistics</div>-->
+<!--                    <div class="table-data"><a href="https://gitlab.com/kdg-ti/integration-1.2/2022-2023/s2-05/S2-05/-/boards/5353083" target="_blank">GitLab Link</a></div>-->
+<!--                </div>-->
+<!--                <div class="table-row">-->
+<!--                    <div class="table-data">Narjiss</div>-->
+<!--                    <div class="table-data">login html form and game statistics</div>-->
+<!--                    <div class="table-data"><a href="https://gitlab.com/kdg-ti/integration-1.2/2022-2023/s2-05/S2-05/-/boards/5353083" target="_blank">GitLab Link</a></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+
+
+
+
+
+</main>
+
+
+
+    <footer> PillGate &#169; 2023 All rights reserved</footer>
+</body>
+</html>

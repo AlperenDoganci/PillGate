@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" th:href="@{../style.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}">
+    </script>
+    <script defer th:src="@{../static/js/users.js}"></script>
+    <script defer th:src="@{../static/js/dropdown-menu.js}"></script>
+    <script defer th:src="@{../static/js/reminder.js}"></script>
+    <script defer th:src="@{../static/js/readSensor.js}"></script>
+
+</head>
+<body data-spy="scroll" data-target="#navbar" data-offset="56">
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/home}">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/loadSensor}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/reminder}">Medication Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/PresentedBy}">Presented By</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto"> <!-- Use ms-auto here -->
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary me-2" th:href="@{/registration}">Register</a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.isLoggedIn}">
+                        <a class="btn btn-primary" th:href="@{/login}">Log In</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.isLoggedIn}">
+                        <a class="btn btn-primary" th:href="@{/logout}">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="container mt-5">
+    <h1 class="text-center">Dashboard</h1>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+
+            <th>Weight: </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over sensors and populate the table rows -->
+        <tr th:each="sensor : ${sensors}">
+            <td th:utext="${sensor.weight}"></td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <div class="btn-dash">
+        <button onclick="readSensor()" id="dashboard-btn2">Read Sensor</button>
+    </div>
+
+    <div id="charts">
+        <div>
+            <h2>Pill Taking Overview</h2>
+            <img th:src="${pillsTakenChartUrl}" class="charts-img" alt="Pill Taking Overview Chart"/>
+        </div>
+        <div>
+            <h2>Time of Day Overview</h2>
+            <img th:src="${timeOfDayChartUrl}" class="charts-img" alt="Time of Day Overview Chart"/>
+        </div>
+    </div>
+
+    <div class="btn-dash">
+        <button onclick="disconnectSensor()" id="dashboard-btn">Disconnect Sensor</button>
+    </div>
+
+    <script th:src="@{/js/readSensor.js}"></script>
+
+</main>
+    <footer> PillGate &#169; 2023 All rights reserved</footer>
+</body>
+</html>

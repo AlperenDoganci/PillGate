@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Medication Schedule</title>
+
+    <link rel="stylesheet" th:href="@{../style.css}">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <!--SweetAlert2 css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.css">
+    <script defer th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <!--SweetAlert2 js-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script defer th:src="@{../static/js/users.js}"></script>
+    <script defer th:src="@{../static/js/dropdown-menu.js}"></script>
+    <script defer th:src="@{../static/js/reminder.js}"></script>
+    <script defer th:src="@{../static/js/accessPage.js}"></script>
+</head>
+<body data-spy="scroll" data-target="#navbar" data-offset="56">
+<header>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <div class="navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" th:href="@{/home}">Homepage</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/loadSensor}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/reminder}">Medication Schedule</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/PresentedBy}">Presented By</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto"> <!-- Use ms-auto here -->
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary me-2" th:href="@{/registration}">Register</a>
+                    </li>
+                    <li class="nav-item" th:unless="${session.isLoggedIn}">
+                        <a class="btn btn-primary" th:href="@{/login}">Log In</a>
+                    </li>
+                    <li class="nav-item" th:if="${session.isLoggedIn}">
+                        <a class="btn btn-primary" th:href="@{/logout}">Log out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<main>
+    <div class="container mt-5">
+        <h3 class="welcome">Enter your medication details</h3>
+        <form th:action="@{/reminder}" th:object="${pillForm}" method="post" modelAttribute="pillForm" id="reminder-form">
+            <input type="hidden" th:field="*{customer_id}" th:value="${customer_id}" />
+
+            <!-- Add this section to display validation errors -->
+            <div th:if="${#fields.hasAnyErrors()}" class="alert alert-danger">
+                <p>The form contained errors!</p>
+            </div>
+
+            <div class="mb-3">
+                <label th:for="pillName" class="form-label">Pill Name</label>
+                <input type="text" class="form-control" id="pillName" th:field="*{pillName}" required>
+                <div th:if="${#fields.hasErrors('pillName')}" class="alert alert-danger">
+                    <p th:errors="*{pillName}">The pill name has errors!</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label th:for="timeTakePill" class="form-label">Time</label>
+                <input type="datetime-local" class="form-control" id="timeTakePill" lang="en" th:field="*{timeTakePill}" required>
+                <div th:if="${#fields.hasErrors('timeTakePill')}" class="alert alert-danger">
+                    <p th:errors="*{timeTakePill}">The time has errors!</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label th:for="nrOfPillsPlaced" class="form-label">Number of pills placed in the pillbox</label>
+                <input type="number" class="form-control" id="nrOfPillsPlaced" th:field="*{nrOfPillsPlaced}">
+                <div th:if="${#fields.hasErrors('nrOfPillsPlaced')}" class="alert alert-danger">
+                    <p th:errors="*{nrOfPillsPlaced}">The number of pills placed has errors!</p>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label th:for="interval" class="form-label">Interval</label>
+                <select name="interval" class="form-control" id="interval" th:field="*{repeatIn}" required>
+                <option value="1">1 hour</option>
+                <option value="2">2 hours</option>
+                <option value="3">3 hours</option>
+                <option value="4">4 hours</option>
+                <option value="5">5 hours</option>
+                <option value="6">6 hours</option>
+                <option value="7">7 hours</option>
+                <option value="8">8 hours</option>
+                <option value="9">9 hours</option>
+                <option value="10">10 hours</option>
+                <option value="11">11 hours</option>
+                <option value="12">12 hours</option>
+                <option value="13">13 hours</option>
+                <option value="14">14 hours</option>
+                <option value="15">15 hours</option>
+                <option value="16">16 hours</option>
+                <option value="17">17 hours</option>
+                <option value="18">18 hours</option>
+                <option value="19">19 hours</option>
+                <option value="20">20 hours</option>
+                <option value="21">21 hours</option>
+                <option value="22">22 hours</option>
+                <option value="23">23 hours</option>
+                <option value="24">24 hours</option>
+            </select>
+            <div th:if="${#fields.hasErrors('repeatIn')}" class="alert alert-danger">
+                <p th:errors="*{repeatIn}">The interval has errors!</p>
+            </div>
+        </div>
+
+            <button type="submit" class="btn btn-primary" id="reminder-btn">Schedule Reminder</button>
+        </form>
+    </div>
+
+    <script th:src="@{/js/reminder.js}"></script>
+</main>
+    <footer> PillGate &#169; 2023 All rights reserved</footer>
+</body>
+</html>
